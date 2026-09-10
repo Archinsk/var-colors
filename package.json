@@ -1,0 +1,32 @@
+{
+  "name": "var-colors",
+  "version": "1.0.3",
+  "description": "Sass utility to generate scalable OKLCH color palettes with CSS Custom Properties.",
+  "keywords": [
+    "sass",
+    "scss",
+    "color",
+    "palette",
+    "oklch",
+    "design-system",
+    "css-variables"
+  ],
+  "homepage": "https://github.com/Archinsk/var-colors#readme",
+  "author": "Mikhail Vasilev",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Archinsk/var-colors.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Archinsk/var-colors/issues"
+  },
+  "main": "scss/index.scss",
+  "sass": "scss/index.scss",
+  "peerDependencies": {
+    "sass": "^1.70.0"
+  },
+  "devDependencies": {
+    "sass": "^1.70.0"
+  }
+}

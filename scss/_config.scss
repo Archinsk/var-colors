@@ -1,0 +1,16 @@
+$colors: (
+  "grey",
+  "red",
+  "orange",
+  "yellow",
+  "green",
+  "cyan",
+  "blue",
+  "violet"
+) !default;
+$levels: () !default;
+$levels-step: 50 !default;
+$consistent-chroma: false !default;
+$gamut: "srgb" !default;
+$prefix: null !default;
+$custom-colors: () !default;

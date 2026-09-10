@@ -1,0 +1,26 @@
+@use "sass:math";
+@use "sass:list";
+@use "sass:map";
+
+$root-rule: true !default;
+$default-max-chroma: 0.3;
+$default-max-chroma-lightness: 0.75;
+$min-levels-step: 25;
+$steps-total: math.div(1000, $min-levels-step);
+$darkest-levels-lightness-map: (
+  925: 0.2029,
+  950: 0.1757,
+  975: 0.1398,
+);
+$darkest-levels: map.keys($darkest-levels-lightness-map);
+$regular-levels: $steps-total - list.length($darkest-levels);
+$regular-levels-lightness-step: math.div(
+  1 - map.get($darkest-levels-lightness-map, 925),
+  $regular-levels
+);
+$base-palette: (
+  "white": oklch(1 0 none),
+  "black": oklch(0 0 none),
+);
+$valid-levels-steps: (25, 50, 100, 125, 200, 250, 500);
+$valid-gamuts: ("srgb", "display-p3", "rec2020");
