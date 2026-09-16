@@ -14,13 +14,36 @@ $consistent-chroma: false !default;
 $gamut: "srgb" !default;
 $prefix: null !default;
 $custom-colors: () !default;
+$config: () !default;
 
-// @use "./_config" as *;
 @use "./_constants" as *;
 @use "./_maps" as *;
 @use "./_functions" as *;
 @use "sass:map";
 @use "sass:list";
+
+// 0.The option to set the configuration from the map
+@if map.has-key($config, "colors") {
+  $colors: map.get($config, "colors");
+}
+@if map.has-key($config, "levels") {
+  $levels: map.get($config, "levels");
+}
+@if map.has-key($config, "levels-step") {
+  $levels-step: map.get($config, "levels-step");
+}
+@if map.has-key($config, "consistent-chroma") {
+  $consistent-chroma: map.get($config, "consistent-chroma");
+}
+@if map.has-key($config, "gamut") {
+  $gamut: map.get($config, "gamut");
+}
+@if map.has-key($config, "prefix") {
+  $prefix: map.get($config, "prefix");
+}
+@if map.has-key($config, "custom-colors") {
+  $custom-colors: map.get($config, "custom-colors");
+}
 
 // 1.Configuration validations
 $colors: get-valid-colors($colors);
