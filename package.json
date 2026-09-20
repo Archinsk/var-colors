@@ -1,6 +1,6 @@
 {
   "name": "var-colors",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Sass utility to generate scalable OKLCH color palettes with CSS Custom Properties.",
   "keywords": [
     "sass",

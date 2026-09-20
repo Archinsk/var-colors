@@ -14,133 +14,177 @@ $consistent-chroma: false !default;
 $gamut: "srgb" !default;
 $prefix: null !default;
 $custom-colors: () !default;
+$root-rule: true !default;
 $config: () !default;
+$auto-generate: true !default;
 
 @use "./_constants" as *;
 @use "./_maps" as *;
 @use "./_functions" as *;
 @use "sass:map";
 @use "sass:list";
+@use "sass:meta";
 
-// 0.The option to set the configuration from the map
-@if map.has-key($config, "colors") {
-  $colors: map.get($config, "colors");
-}
-@if map.has-key($config, "levels") {
-  $levels: map.get($config, "levels");
-}
-@if map.has-key($config, "levels-step") {
-  $levels-step: map.get($config, "levels-step");
-}
-@if map.has-key($config, "consistent-chroma") {
-  $consistent-chroma: map.get($config, "consistent-chroma");
-}
-@if map.has-key($config, "gamut") {
-  $gamut: map.get($config, "gamut");
-}
-@if map.has-key($config, "prefix") {
-  $prefix: map.get($config, "prefix");
-}
-@if map.has-key($config, "custom-colors") {
-  $custom-colors: map.get($config, "custom-colors");
+@function -config-value($config, $key, $fallback) {
+  @if meta.type-of($config) == "map" and map.has-key($config, $key) {
+    @return map.get($config, $key);
+  }
+
+  @return $fallback;
 }
 
-// 1.Configuration validations
-$colors: get-valid-colors($colors);
-$levels: get-valid-levels($levels);
-$levels-step: get-valid-levels-step($levels-step, $levels);
-$consistent-chroma: get-valid-consistent-chroma($consistent-chroma);
-$gamut: get-valid-gamut($gamut);
-$prefix: get-valid-prefix($prefix);
-$root-rule: get-valid-root-rule($root-rule);
+@function -generate-data($config: ()) {
+  $resolved-colors: -config-value($config, "colors", $colors);
+  $resolved-levels: -config-value($config, "levels", $levels);
+  $resolved-levels-step: -config-value($config, "levels-step", $levels-step);
+  $resolved-consistent-chroma: -config-value(
+    $config,
+    "consistent-chroma",
+    $consistent-chroma
+  );
+  $resolved-gamut: -config-value($config, "gamut", $gamut);
+  $resolved-prefix: -config-value($config, "prefix", $prefix);
+  $resolved-custom-colors: -config-value(
+    $config,
+    "custom-colors",
+    $custom-colors
+  );
+  $resolved-root-rule: -config-value($config, "root-rule", $root-rule);
 
-// 2.Getting preset colors by the configuration
-$configured-preset-colors: get-preset-colors-by-keys($colors);
+  $resolved-colors: get-valid-colors($resolved-colors);
+  $resolved-levels: get-valid-levels($resolved-levels);
+  $resolved-levels-step: get-valid-levels-step(
+    $resolved-levels-step,
+    $resolved-levels
+  );
+  $resolved-consistent-chroma: get-valid-consistent-chroma(
+    $resolved-consistent-chroma
+  );
+  $resolved-gamut: get-valid-gamut($resolved-gamut);
+  $resolved-prefix: get-valid-prefix($resolved-prefix);
+  $resolved-root-rule: get-valid-root-rule($resolved-root-rule);
 
-// 3.Creating a list of levels
-$levels: get-levels-by-config($levels, $levels-step);
+  $configured-preset-colors: get-preset-colors-by-keys($resolved-colors);
+  $resolved-levels: get-levels-by-config(
+    $resolved-levels,
+    $resolved-levels-step
+  );
+  $preset-colors-with-max-chroma: get-preset-colors-chroma(
+    $configured-preset-colors,
+    $resolved-consistent-chroma,
+    $resolved-gamut
+  );
+  $preset-colors-palette: get-preset-colors-palette(
+    $preset-colors-with-max-chroma,
+    $resolved-levels,
+    $resolved-gamut,
+    $resolved-prefix
+  );
 
-// 4.Setting the max-chroma value for preset colors
-$preset-colors-with-max-chroma: get-preset-colors-chroma(
-  $configured-preset-colors,
-  $consistent-chroma,
-  $gamut
-);
+  $resolved-custom-colors: filter-colors-by-valid-hue($resolved-custom-colors);
+  $resolved-custom-colors: convert-custom-colors-string-hues-to-numbers(
+    $resolved-custom-colors
+  );
+  $resolved-custom-colors: get-custom-color-chroma(
+    $resolved-custom-colors,
+    $resolved-gamut
+  );
+  $resolved-custom-colors: validate-custom-colors-max-chroma-lightness(
+    $resolved-custom-colors
+  );
+  $resolved-custom-colors: get-custom-colors-max-chroma-lightness(
+    $resolved-custom-colors,
+    $resolved-gamut
+  );
 
-// 5.Generating a palette of shades of preset colors
-$preset-colors-palette: get-preset-colors-palette(
-  $preset-colors-with-max-chroma,
-  $levels,
-  $gamut,
-  $prefix
-);
+  $resolved-var-hues: get-dynamic-var-hues(
+    $resolved-custom-colors,
+    $resolved-prefix
+  );
+  $resolved-custom-colors: get-custom-colors-variable-hue(
+    $resolved-custom-colors,
+    $resolved-prefix
+  );
+  $custom-colors-palette: get-custom-colors-palette(
+    $resolved-custom-colors,
+    $resolved-levels,
+    $resolved-gamut,
+    $resolved-prefix
+  );
 
-// 6.Filtering custom colors by valid hue
-$custom-colors: filter-colors-by-valid-hue($custom-colors);
+  @if list.length(map.keys($custom-colors-palette)) >
+    0 and
+    list.length(map.keys($preset-colors-palette)) ==
+    0
+  {
+    $custom-colors-palette: map.merge($custom-colors-palette, $base-palette);
+  } @else if list.length(map.keys($preset-colors-palette)) > 0 {
+    $preset-colors-palette: map.merge($base-palette, $preset-colors-palette);
+  }
 
-// 7.Converting string custom colors hue values matching the names of preset colors to numeric values
-$custom-colors: convert-custom-colors-string-hues-to-numbers($custom-colors);
+  $custom-hues-count: list.length(map.keys($resolved-var-hues));
+  $custom-shades-count: list.length(map.keys($custom-colors-palette));
+  $preset-shades-count: list.length(map.keys($preset-colors-palette));
+  $resolved-palette: map.merge($custom-colors-palette, $preset-colors-palette);
 
-// 8.Setting the max-chroma value for custom colors
-$custom-colors: get-custom-color-chroma($custom-colors, $gamut);
-
-// 9.Adoption of max-chroma-lightness values to the range from 0 to 1
-$custom-colors: validate-custom-colors-max-chroma-lightness($custom-colors);
-
-// 10.Setting the max-chroma-lightness value for custom colors
-$custom-colors: get-custom-colors-max-chroma-lightness($custom-colors, $gamut);
-
-// 11.Getting a list of dynamic hues
-$var-hues: get-dynamic-var-hues($custom-colors, $prefix);
-
-// 12.Creating a list of dynamic hue values
-$custom-colors: get-custom-colors-variable-hue($custom-colors, $prefix);
-
-// 13.Generating a palette of shades of custom colors
-$custom-colors-palette: get-custom-colors-palette(
-  $custom-colors,
-  $levels,
-  $gamut,
-  $prefix
-);
-
-// 14.Combining a palette of shades
-@if list.length(map.keys($custom-colors-palette)) >
-  0 and
-  list.length(map.keys($preset-colors-palette)) ==
-  0
-{
-  $custom-colors-palette: map.merge($custom-colors-palette, $base-palette);
-} @else if list.length(map.keys($preset-colors-palette)) > 0 {
-  $preset-colors-palette: map.merge($base-palette, $preset-colors-palette);
+  @return (
+    palette: $resolved-palette,
+    var-hues: $resolved-var-hues,
+    prefix: $resolved-prefix,
+    root-rule: $resolved-root-rule,
+    custom-hues-count: $custom-hues-count,
+    custom-shades-count: $custom-shades-count,
+    preset-shades-count: $preset-shades-count,
+  );
 }
-$custom-hues-count: list.length(map.keys($var-hues));
-$custom-shades-count: list.length(map.keys($custom-colors-palette));
-$preset-shades-count: list.length(map.keys($preset-colors-palette));
-$palette: map.merge($custom-colors-palette, $preset-colors-palette);
 
-// 15.Creating a root rule with custom property values
-@if $root-rule {
-  :root {
-    @each $var-name, $default-hue in $var-hues {
-      @if $prefix {
-        $var-name: #{$prefix}-#{$var-name};
+@mixin -emit-custom-properties($data) {
+  $resolved-root-rule: map.get($data, "root-rule");
+  $resolved-prefix: map.get($data, "prefix");
+  $resolved-var-hues: map.get($data, "var-hues");
+  $resolved-palette: map.get($data, "palette");
+
+  @if $resolved-root-rule {
+    :root {
+      @each $var-name, $default-hue in $resolved-var-hues {
+        @if $resolved-prefix {
+          $var-name: #{$resolved-prefix}-#{$var-name};
+        }
+        --#{$var-name}: #{$default-hue};
       }
-      --#{$var-name}: #{$default-hue};
-    }
-    @each $color-name, $color-value in $palette {
-      @if $prefix {
-        $color-name: #{$prefix}-#{$color-name};
+      @each $color-name, $color-value in $resolved-palette {
+        @if $resolved-prefix {
+          $color-name: #{$resolved-prefix}-#{$color-name};
+        }
+        --#{$color-name}: #{$color-value};
       }
-      --#{$color-name}: #{$color-value};
     }
   }
 }
 
-// 16.Report on completed work
-@debug get-report(
-  $custom-hues-count,
-  $custom-shades-count,
-  $preset-shades-count,
-  $root-rule
-);
+@mixin generate($config: ()) {
+  $data: -generate-data($config);
+  @include -emit-custom-properties($data);
+  @debug get-report(
+    map.get($data, "custom-hues-count"),
+    map.get($data, "custom-shades-count"),
+    map.get($data, "preset-shades-count"),
+    map.get($data, "root-rule")
+  );
+}
+
+$palette: ();
+$var-hues: ();
+
+@if $auto-generate {
+  $generated: -generate-data($config);
+  $palette: map.get($generated, "palette");
+  $var-hues: map.get($generated, "var-hues");
+  @include -emit-custom-properties($generated);
+  @debug get-report(
+    map.get($generated, "custom-hues-count"),
+    map.get($generated, "custom-shades-count"),
+    map.get($generated, "preset-shades-count"),
+    map.get($generated, "root-rule")
+  );
+}

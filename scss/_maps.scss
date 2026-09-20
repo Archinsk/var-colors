@@ -8,12 +8,12 @@ $preset-colors: (
     hue: none,
     max-chroma: (
       srgb: 0,
-      pisplay-p3: 0,
+      display-p3: 0,
       rec2020: 0,
     ),
     max-chroma-lightness: (
       srgb: 0,
-      pisplay-p3: 0,
+      display-p3: 0,
       rec2020: 0,
     ),
   ),
@@ -21,12 +21,12 @@ $preset-colors: (
     hue: 0,
     max-chroma: (
       srgb: 0.26,
-      pisplay-p3: 0.3,
+      display-p3: 0.3,
       rec2020: 0.37,
     ),
     max-chroma-lightness: (
       srgb: 0.65,
-      pisplay-p3: 0.67,
+      display-p3: 0.67,
       rec2020: 0.7,
     ),
   ),
@@ -34,12 +34,12 @@ $preset-colors: (
     hue: 15,
     max-chroma: (
       srgb: 0.25,
-      pisplay-p3: 0.29,
+      display-p3: 0.29,
       rec2020: 0.36,
     ),
     max-chroma-lightness: (
       srgb: 0.64,
-      pisplay-p3: 0.66,
+      display-p3: 0.66,
       rec2020: 0.69,
     ),
   ),
@@ -47,12 +47,12 @@ $preset-colors: (
     hue: 30,
     max-chroma: (
       srgb: 0.25,
-      pisplay-p3: 0.29,
+      display-p3: 0.29,
       rec2020: 0.31,
     ),
     max-chroma-lightness: (
       srgb: 0.63,
-      pisplay-p3: 0.66,
+      display-p3: 0.66,
       rec2020: 0.72,
     ),
   ),
@@ -60,12 +60,12 @@ $preset-colors: (
     hue: 45,
     max-chroma: (
       srgb: 0.2,
-      pisplay-p3: 0.23,
+      display-p3: 0.23,
       rec2020: 0.25,
     ),
     max-chroma-lightness: (
       srgb: 0.7,
-      pisplay-p3: 0.72,
+      display-p3: 0.72,
       rec2020: 0.78,
     ),
   ),
@@ -73,12 +73,12 @@ $preset-colors: (
     hue: 60,
     max-chroma: (
       srgb: 0.17,
-      pisplay-p3: 0.2,
+      display-p3: 0.2,
       rec2020: 0.22,
     ),
     max-chroma-lightness: (
       srgb: 0.76,
-      pisplay-p3: 0.78,
+      display-p3: 0.78,
       rec2020: 0.83,
     ),
   ),
@@ -86,12 +86,12 @@ $preset-colors: (
     hue: 75,
     max-chroma: (
       srgb: 0.17,
-      pisplay-p3: 0.19,
+      display-p3: 0.19,
       rec2020: 0.21,
     ),
     max-chroma-lightness: (
       srgb: 0.81,
-      pisplay-p3: 0.82,
+      display-p3: 0.82,
       rec2020: 0.87,
     ),
   ),
@@ -99,12 +99,12 @@ $preset-colors: (
     hue: 90,
     max-chroma: (
       srgb: 0.17,
-      pisplay-p3: 0.2,
+      display-p3: 0.2,
       rec2020: 0.21,
     ),
     max-chroma-lightness: (
       srgb: 0.86,
-      pisplay-p3: 0.87,
+      display-p3: 0.87,
       rec2020: 0.9,
     ),
   ),
@@ -112,12 +112,12 @@ $preset-colors: (
     hue: 105,
     max-chroma: (
       srgb: 0.19,
-      pisplay-p3: 0.23,
+      display-p3: 0.23,
       rec2020: 0.24,
     ),
     max-chroma-lightness: (
       srgb: 0.94,
-      pisplay-p3: 0.94,
+      display-p3: 0.94,
       rec2020: 0.96,
     ),
   ),
@@ -125,12 +125,12 @@ $preset-colors: (
     hue: 120,
     max-chroma: (
       srgb: 0.22,
-      pisplay-p3: 0.25,
+      display-p3: 0.25,
       rec2020: 0.26,
     ),
     max-chroma-lightness: (
       srgb: 0.94,
-      pisplay-p3: 0.94,
+      display-p3: 0.94,
       rec2020: 0.94,
     ),
   ),
@@ -138,12 +138,12 @@ $preset-colors: (
     hue: 135,
     max-chroma: (
       srgb: 0.26,
-      pisplay-p3: 0.3,
+      display-p3: 0.3,
       rec2020: 0.31,
     ),
     max-chroma-lightness: (
       srgb: 0.89,
-      pisplay-p3: 0.89,
+      display-p3: 0.89,
       rec2020: 0.9,
     ),
   ),
@@ -151,12 +151,12 @@ $preset-colors: (
     hue: 150,
     max-chroma: (
       srgb: 0.24,
-      pisplay-p3: 0.32,
+      display-p3: 0.32,
       rec2020: 0.43,
     ),
     max-chroma-lightness: (
       srgb: 0.88,
-      pisplay-p3: 0.86,
+      display-p3: 0.86,
       rec2020: 0.84,
     ),
   ),
@@ -164,12 +164,12 @@ $preset-colors: (
     hue: 165,
     max-chroma: (
       srgb: 0.18,
-      pisplay-p3: 0.25,
+      display-p3: 0.25,
       rec2020: 0.38,
     ),
     max-chroma-lightness: (
       srgb: 0.89,
-      pisplay-p3: 0.87,
+      display-p3: 0.87,
       rec2020: 0.84,
     ),
   ),
@@ -177,12 +177,12 @@ $preset-colors: (
     hue: 180,
     max-chroma: (
       srgb: 0.16,
-      pisplay-p3: 0.21,
+      display-p3: 0.21,
       rec2020: 0.33,
     ),
     max-chroma-lightness: (
       srgb: 0.9,
-      pisplay-p3: 0.88,
+      display-p3: 0.88,
       rec2020: 0.86,
     ),
   ),
@@ -190,12 +190,12 @@ $preset-colors: (
     hue: 195,
     max-chroma: (
       srgb: 0.15,
-      pisplay-p3: 0.2,
+      display-p3: 0.2,
       rec2020: 0.3,
     ),
     max-chroma-lightness: (
       srgb: 0.91,
-      pisplay-p3: 0.88,
+      display-p3: 0.88,
       rec2020: 0.83,
     ),
   ),
@@ -203,12 +203,12 @@ $preset-colors: (
     hue: 210,
     max-chroma: (
       srgb: 0.14,
-      pisplay-p3: 0.18,
+      display-p3: 0.18,
       rec2020: 0.27,
     ),
     max-chroma-lightness: (
       srgb: 0.84,
-      pisplay-p3: 0.81,
+      display-p3: 0.81,
       rec2020: 0.73,
     ),
   ),
@@ -216,12 +216,12 @@ $preset-colors: (
     hue: 225,
     max-chroma: (
       srgb: 0.14,
-      pisplay-p3: 0.18,
+      display-p3: 0.18,
       rec2020: 0.27,
     ),
     max-chroma-lightness: (
       srgb: 0.78,
-      pisplay-p3: 0.75,
+      display-p3: 0.75,
       rec2020: 0.64,
     ),
   ),
@@ -229,12 +229,12 @@ $preset-colors: (
     hue: 240,
     max-chroma: (
       srgb: 0.16,
-      pisplay-p3: 0.2,
+      display-p3: 0.2,
       rec2020: 0.31,
     ),
     max-chroma-lightness: (
       srgb: 0.72,
-      pisplay-p3: 0.68,
+      display-p3: 0.68,
       rec2020: 0.53,
     ),
   ),
@@ -242,12 +242,12 @@ $preset-colors: (
     hue: 255,
     max-chroma: (
       srgb: 0.2,
-      pisplay-p3: 0.24,
+      display-p3: 0.24,
       rec2020: 0.35,
     ),
     max-chroma-lightness: (
       srgb: 0.62,
-      pisplay-p3: 0.59,
+      display-p3: 0.59,
       rec2020: 0.44,
     ),
   ),
@@ -255,12 +255,12 @@ $preset-colors: (
     hue: 270,
     max-chroma: (
       srgb: 0.3,
-      pisplay-p3: 0.31,
+      display-p3: 0.31,
       rec2020: 0.32,
     ),
     max-chroma-lightness: (
       srgb: 0.47,
-      pisplay-p3: 0.48,
+      display-p3: 0.48,
       rec2020: 0.47,
     ),
   ),
@@ -268,12 +268,12 @@ $preset-colors: (
     hue: 285,
     max-chroma: (
       srgb: 0.29,
-      pisplay-p3: 0.3,
+      display-p3: 0.3,
       rec2020: 0.32,
     ),
     max-chroma-lightness: (
       srgb: 0.5,
-      pisplay-p3: 0.52,
+      display-p3: 0.52,
       rec2020: 0.5,
     ),
   ),
@@ -281,12 +281,12 @@ $preset-colors: (
     hue: 300,
     max-chroma: (
       srgb: 0.29,
-      pisplay-p3: 0.31,
+      display-p3: 0.31,
       rec2020: 0.33,
     ),
     max-chroma-lightness: (
       srgb: 0.55,
-      pisplay-p3: 0.56,
+      display-p3: 0.56,
       rec2020: 0.54,
     ),
   ),
@@ -294,12 +294,12 @@ $preset-colors: (
     hue: 315,
     max-chroma: (
       srgb: 0.3,
-      pisplay-p3: 0.33,
+      display-p3: 0.33,
       rec2020: 0.35,
     ),
     max-chroma-lightness: (
       srgb: 0.62,
-      pisplay-p3: 0.63,
+      display-p3: 0.63,
       rec2020: 0.6,
     ),
   ),
@@ -307,12 +307,12 @@ $preset-colors: (
     hue: 330,
     max-chroma: (
       srgb: 0.31,
-      pisplay-p3: 0.35,
+      display-p3: 0.35,
       rec2020: 0.39,
     ),
     max-chroma-lightness: (
       srgb: 0.7,
-      pisplay-p3: 0.71,
+      display-p3: 0.71,
       rec2020: 0.69,
     ),
   ),
@@ -320,12 +320,12 @@ $preset-colors: (
     hue: 345,
     max-chroma: (
       srgb: 0.28,
-      pisplay-p3: 0.32,
+      display-p3: 0.32,
       rec2020: 0.4,
     ),
     max-chroma-lightness: (
       srgb: 0.67,
-      pisplay-p3: 0.69,
+      display-p3: 0.69,
       rec2020: 0.73,
     ),
   ),
